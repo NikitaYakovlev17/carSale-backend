@@ -8,13 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
 
 @ToString
 @NoArgsConstructor
@@ -32,16 +27,10 @@ public class User extends BaseEntity {
     private String firstName;
 
     @Column(nullable = false)
-    private String lastName;
-
-    @Column(nullable = false)
     private String password;
 
-    @Column
-    private String description;
-
-    @Column
-    private String link;
+    @Column(nullable = false)
+    private String phoneNumber;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -50,4 +39,7 @@ public class User extends BaseEntity {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Collection<Car> cars;
 }

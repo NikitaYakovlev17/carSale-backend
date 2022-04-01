@@ -1,0 +1,39 @@
+application:
+  version: 1.0
+  title: CarSale
+  description: Car sale application
+  base-package: com.yakovlev.car.sale
+
+#localhost:8080/swagger-ui.html
+# db
+sharding:
+  jdbc:
+    config:
+      props:
+        sql:
+          show=true
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/car_sale_db
+    username: postgres
+    password: 375333587914pmc
+  jpa:
+    hibernate:
+      #      ddl-auto: updateSubscription
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# jwt
+jwt:
+  token:
+    secret: jwtprojectpass
+    expired: 3600000
+
+springdoc:
+  api-docs:
+    path: /v1
+server:
+  port: 8080

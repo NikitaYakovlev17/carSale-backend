@@ -9,6 +9,7 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @ToString
 @NoArgsConstructor
@@ -17,6 +18,7 @@ import javax.persistence.Entity;
 @Setter
 @Builder
 @Entity
+@Table(name = "\"role\"")
 public class Role extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String name;
