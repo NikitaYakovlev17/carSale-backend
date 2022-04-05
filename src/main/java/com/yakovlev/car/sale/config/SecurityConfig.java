@@ -1,5 +1,8 @@
 package com.yakovlev.car.sale.config;
 
+import com.yakovlev.car.sale.exception.filter.ExceptionHandlerFilter;
+import com.yakovlev.car.sale.jwt.JwtTokenFilter;
+import com.yakovlev.car.sale.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,13 +21,18 @@ import org.springframework.web.filter.CorsFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final JwtTokenProvider jwtTokenProvider;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .addFilterBefore(new ExceptionHandlerFilter(), CorsFilter.class)
                 .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .apply(new JwtConfigurer(jwtTokenProvider))
                 .and()
                 .logout()
                 .logoutUrl("/logout")
@@ -43,4 +51,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Configuration
+    public static class JwtConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+        private final JwtTokenProvider jwtTokenProvider;
+
+        public JwtConfigurer(JwtTokenProvider jwtTokenProvider) {
+            this.jwtTokenProvider = jwtTokenProvider;
+        }
+
+        @Override
+        public void configure(HttpSecurity httpSecurity) {
+            JwtTokenFilter jwtTokenFilter = new JwtTokenFilter(jwtTokenProvider);
+            httpSecurity.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        }
+    }
 }

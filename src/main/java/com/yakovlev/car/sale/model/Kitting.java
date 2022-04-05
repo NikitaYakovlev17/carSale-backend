@@ -19,6 +19,6 @@ public class Kitting extends BaseEntity {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "car_id", nullable = false)
-    private Car car;
+    @JoinColumn(name = "car_ad_id", nullable = false)
+    private CarAd carAd;
 }

@@ -11,3 +11,5 @@ public class CarSaleApplication {
 	}
 
 }
+
+//drop table body, car_ad, color, drive, engine, generation, kitting, model, producer, transmission, "user";

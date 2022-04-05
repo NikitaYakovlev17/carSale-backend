@@ -41,5 +41,5 @@ public class User extends BaseEntity {
     private Role role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Collection<Car> cars;
+    private Collection<CarAd> carAds;
 }

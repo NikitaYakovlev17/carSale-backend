@@ -12,7 +12,7 @@ import java.util.Collection;
 @Setter
 @Builder
 @Entity
-public class Car extends BaseEntity {
+public class CarAd extends BaseEntity {
     @Column(nullable = false)
     private String mileage;
 
@@ -43,7 +43,7 @@ public class Car extends BaseEntity {
     @JoinColumn(nullable = false)
     private Color color;
 
-    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "carAd", fetch = FetchType.LAZY)
     private Collection<Kitting> kittings;
 
     @ManyToOne
