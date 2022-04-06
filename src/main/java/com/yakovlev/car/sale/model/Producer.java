@@ -18,7 +18,4 @@ import java.util.Collection;
 public class Producer extends BaseEntity {
     @Column(nullable = false)
     private String name;
-
-    @OneToMany(mappedBy = "producer", fetch = FetchType.LAZY)
-    private Collection<Model> models;
 }

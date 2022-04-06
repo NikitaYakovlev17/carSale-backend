@@ -17,5 +17,5 @@ public class Engine extends BaseEntity {
     private String type;
 
     @Column(nullable = false)
-    private String displacement;
+    private Integer displacement;
 }
