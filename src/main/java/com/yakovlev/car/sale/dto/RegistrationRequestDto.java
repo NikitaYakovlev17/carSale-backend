@@ -15,6 +15,8 @@ public record RegistrationRequestDto(
         String firstName,
 
         @NotBlank(message = "phoneNumber cannot be blank")
+        @Pattern(regexp = "^(\\+375|80|375)(29|25|44|33)(\\d{3})(\\d{2})(\\d{2})$",
+                message = "Неверный номер телефона")
         String phoneNumber,
 
         RoleRequestDto role,

@@ -56,9 +56,9 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/register")
-    public void register(@RequestBody RegistrationRequestDto user){
-        //userService.isUserRegistered(user.email());
+    public void register(@Valid @RequestBody RegistrationRequestDto user){
+        userService.isUserRegistered(user.email());
         userService.register(user);
-        //log.info("User with email {} successfully registered. {}", user.email(), LocalDate.now());
+        log.info("User with email {} successfully registered. {}", user.email(), LocalDate.now());
     }
 }

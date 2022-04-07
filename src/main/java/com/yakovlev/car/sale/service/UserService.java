@@ -43,7 +43,7 @@ public class UserService {
                         .email(userDto.email())
                         .firstName(userDto.firstName())
                         .phoneNumber(userDto.phoneNumber())
-                        .role(this.roleRepository.findByName(userDto.role().name()))
+                        .role(this.roleRepository.findByName("USER"))
                         .password(passwordEncoder.encode(userDto.password()))
                         .status(ActivityStatus.ACTIVE)
                         .build()
