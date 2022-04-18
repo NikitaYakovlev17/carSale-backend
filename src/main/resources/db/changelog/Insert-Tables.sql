@@ -9,6 +9,8 @@ values ('ADMIN'),
 insert into producer(name)
 values ('Audi'),
        ('BMW'),
+       ('Chevrolet'),
+       ('Mercedes-Benz'),
        ('Volkswagen');
 
 --заполение таблицы model

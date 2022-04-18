@@ -18,6 +18,10 @@ public class CarAdService {
         return carAdMapper.toDto(carAdRepository.findAll());
     }
 
+    public CarAdDto getById(Long id){
+        return carAdMapper.toDto(carAdRepository.getById(id));
+    }
+
 
 //    public User getByEmail(String email) throws Exception {
 //        return this.userRepository.findByEmail(email).orElseThrow(() ->

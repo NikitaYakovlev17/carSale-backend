@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface CarAdRepository extends JpaRepository<CarAd, Long> {
     List<CarAd> findAll();
+
+    CarAd getById(Long id);
 }
