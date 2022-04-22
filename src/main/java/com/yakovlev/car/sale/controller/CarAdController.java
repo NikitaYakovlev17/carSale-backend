@@ -1,12 +1,15 @@
 package com.yakovlev.car.sale.controller;
 
 import com.yakovlev.car.sale.dto.carAd.CarAdDto;
+import com.yakovlev.car.sale.dto.generation.GenerationDto;
 import com.yakovlev.car.sale.dto.model.ModelDto;
 import com.yakovlev.car.sale.dto.producer.ProducerDto;
 import com.yakovlev.car.sale.model.CarAd;
 import com.yakovlev.car.sale.model.CarAdPage;
 import com.yakovlev.car.sale.model.CarAdSearchCriteria;
+import com.yakovlev.car.sale.model.Model;
 import com.yakovlev.car.sale.service.CarAdService;
+import com.yakovlev.car.sale.service.GenerationService;
 import com.yakovlev.car.sale.service.ModelService;
 import com.yakovlev.car.sale.service.ProducerService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +32,7 @@ public class CarAdController {
     private final CarAdService carAdService;
     private final ProducerService producerService;
     private final ModelService modelService;
+    private final GenerationService generationService;
 
     @GetMapping("/producers")
     public List<ProducerDto> getAllProducers(){
@@ -40,18 +44,24 @@ public class CarAdController {
         return carAdService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public CarAdDto getById(@PathVariable Long id){
-        return carAdService.getById(id);
+//    @GetMapping("/{id}")
+//    public CarAdDto getById(@PathVariable Long id){
+//        return carAdService.getById(id);
+//    }
+
+    @GetMapping("/{producer}")
+    public List<ModelDto> getAllModelsByProducerName(@PathVariable String producer){
+        return modelService.getAllByProducerName(producer);
     }
 
-    @GetMapping("/models/{id}")
-    public List<ModelDto> getAllModelsByProducerId(@PathVariable Long id){
-        return modelService.getAllByProducerId(id);
-    }
+//    @GetMapping("/producer/{model}")
+//    public List<GenerationDto> getAllGenerationsByModelName(@PathVariable String model){
+//        return generationService.getAllByModelName(model);
+//    }
 
-    @GetMapping("/cars")
-    public ResponseEntity<List<CarAdDto>> getCarAds(CarAdPage carAdPage, CarAdSearchCriteria carAdSearchCriteria){
+    @GetMapping("/producer/{model}")
+    public ResponseEntity<List<CarAdDto>> getCarAds(@PathVariable String model, CarAdPage carAdPage, CarAdSearchCriteria carAdSearchCriteria){
+        generationService.getAllByModelName(model);
         return new ResponseEntity<>(carAdService.getCarAds(carAdPage, carAdSearchCriteria),
                 HttpStatus.OK);
     }

@@ -18,8 +18,8 @@ public class ModelService {
     private final ModelRepository modelRepository;
     private final ModelMapper modelMapper;
 
-    public List<ModelDto> getAllByProducerId(Long id) {
-        return modelMapper.toDto(modelRepository.getAllByProducerId(id));
+    public List<ModelDto> getAllByProducerName(String name) {
+        return modelMapper.toDto(modelRepository.getAllByProducerName(name));
     }
 
 }
