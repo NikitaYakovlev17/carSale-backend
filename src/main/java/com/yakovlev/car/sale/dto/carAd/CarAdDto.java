@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class CarAdDto {
     Long id;
+    Integer price;
     String mileage;
     String description;
     GenerationDto generation;

@@ -44,24 +44,23 @@ public class CarAdController {
         return carAdService.getAll();
     }
 
-//    @GetMapping("/{id}")
-//    public CarAdDto getById(@PathVariable Long id){
-//        return carAdService.getById(id);
-//    }
+    @GetMapping("id/{id}")
+    public CarAdDto getById(@PathVariable Long id){
+        return carAdService.getById(id);
+    }
 
     @GetMapping("/{producer}")
     public List<ModelDto> getAllModelsByProducerName(@PathVariable String producer){
         return modelService.getAllByProducerName(producer);
     }
 
-//    @GetMapping("/producer/{model}")
-//    public List<GenerationDto> getAllGenerationsByModelName(@PathVariable String model){
-//        return generationService.getAllByModelName(model);
-//    }
-
     @GetMapping("/producer/{model}")
-    public ResponseEntity<List<CarAdDto>> getCarAds(@PathVariable String model, CarAdPage carAdPage, CarAdSearchCriteria carAdSearchCriteria){
-        generationService.getAllByModelName(model);
+    public List<GenerationDto> getAllGenerationsByModelName(@PathVariable String model){
+        return generationService.getAllByModelName(model);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<CarAdDto>> getCarAds(CarAdPage carAdPage, CarAdSearchCriteria carAdSearchCriteria){
         return new ResponseEntity<>(carAdService.getCarAds(carAdPage, carAdSearchCriteria),
                 HttpStatus.OK);
     }

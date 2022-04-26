@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", implementationName = "test")
+@Mapper(componentModel = "spring", implementationName = "test1")
 public interface ModelMapper {
     ModelDto toDto(Model source);
 

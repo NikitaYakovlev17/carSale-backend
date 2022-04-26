@@ -13,6 +13,10 @@ import java.util.Collection;
 @Builder
 @Entity
 public class CarAd extends BaseEntity {
+
+    @Column
+    private Integer price;
+
     @Column(nullable = false)
     private String mileage;
 

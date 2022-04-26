@@ -1,18 +1,14 @@
 package com.yakovlev.car.sale.repository;
 
-import com.yakovlev.car.sale.mapper.CarAdMapper;
-import com.yakovlev.car.sale.model.CarAd;
-import com.yakovlev.car.sale.model.CarAdPage;
-import com.yakovlev.car.sale.model.CarAdSearchCriteria;
-import com.yakovlev.car.sale.model.Generation;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import com.yakovlev.car.sale.model.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +27,6 @@ public class CarAdCriteriaRepository {
     public Page<CarAd> findAllWithFilters(CarAdPage carAdPage, CarAdSearchCriteria carAdSearchCriteria){
         CriteriaQuery<CarAd> criteriaQuery = criteriaBuilder.createQuery(CarAd.class);
         Root<CarAd> carAdRoot = criteriaQuery.from(CarAd.class);
-        //Join<CarAd, Generation> carAdGenerationJoin = carAdRoot.join("generation");
         carAdRoot.join("body");
         Predicate predicate = getPredicate(carAdSearchCriteria, carAdRoot);
         criteriaQuery.where(predicate);
@@ -71,7 +66,7 @@ public class CarAdCriteriaRepository {
         if(Objects.nonNull(carAdSearchCriteria.getBody())){
             predicates.add(
                     criteriaBuilder.like(carAdRoot.get("body"),
-                            "%" + carAdSearchCriteria.getBody().getId() + "%")
+                            "%" + carAdSearchCriteria.getBody() + "%")
             );
         }
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

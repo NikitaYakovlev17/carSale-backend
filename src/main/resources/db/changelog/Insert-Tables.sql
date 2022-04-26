@@ -61,7 +61,7 @@ values (1900, 'diesel'),
        (3000, 'diesel');
 
 --заполение таблицы car_ad
-insert into car_ad(description, mileage, body_id, color_id, drive_id, engine_id, generation_id, transmission_id, user_id)
-values ('qwerty', 300000, 1, 1, 1, 1, 1, 1, 1),
-       ('qwerty2222', 100000, 2, 2, 2, 2, 2, 2, 1);
+insert into car_ad(price, description, mileage, body_id, color_id, drive_id, engine_id, generation_id, transmission_id, user_id)
+values (10000, 'qwerty', 300000, 1, 1, 1, 1, 1, 1, 1),
+       (14500, 'qwerty2222', 100000, 2, 2, 2, 2, 2, 2, 1);
 

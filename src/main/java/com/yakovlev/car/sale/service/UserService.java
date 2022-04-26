@@ -20,6 +20,9 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
+    public UserDto getById(Long id){
+        return userMapper.toDto(userRepository.getById(id));
+    }
 
     public User getByEmail(String email) throws Exception {
         return this.userRepository.findByEmail(email).orElseThrow(() ->

@@ -4,6 +4,7 @@ import com.yakovlev.car.sale.dto.LoginRequestDto;
 import com.yakovlev.car.sale.dto.LoginResponseDto;
 import com.yakovlev.car.sale.dto.RegistrationRequestDto;
 import com.yakovlev.car.sale.dto.user.RoleRequestDto;
+import com.yakovlev.car.sale.dto.user.UserDto;
 import com.yakovlev.car.sale.jwt.JwtTokenProvider;
 import com.yakovlev.car.sale.model.User;
 import com.yakovlev.car.sale.model.enums.ActivityStatus;
@@ -60,5 +61,10 @@ public class UserController {
         userService.isUserRegistered(user.email());
         userService.register(user);
         log.info("User with email {} successfully registered. {}", user.email(), LocalDate.now());
+    }
+
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable Long id){
+        return userService.getById(id);
     }
 }
