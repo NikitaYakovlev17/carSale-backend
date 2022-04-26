@@ -53,4 +53,7 @@ public class CarAd extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "path", fetch = FetchType.LAZY)
+    private Collection<CarPhoto> carPhotos;
 }

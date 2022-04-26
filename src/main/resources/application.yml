@@ -37,3 +37,13 @@ springdoc:
     path: /v1
 server:
   port: 8080
+# dropbox
+dropbox:
+  access:
+    token: sl.BGf1URl3GIguo4fm6zuidYx4a5RyhWa9ZwOvzGowgmIppH9rLGJSWTFbuOg-RBjvWkXXNVHNlQ-vxETNjJWx4lCJqadciHWvNHBefh875a8t0c9wuOAHBf4nBEpXAv51LhTOzdI
+  refresh:
+    token: A5FLsN4caZ4AAAAAAAAAAathwvnoJ5vgGfB8PeW8nztz2p5wp-pDyJkombK-bPL1
+  app:
+    key: ig41u7qfukgu1hm
+    secret: 0mtyn2cwabavy7u
+
