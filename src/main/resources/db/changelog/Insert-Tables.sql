@@ -1,4 +1,4 @@
---drop table body, car_ad, color, drive, engine, generation, kitting, model, producer, transmission;
+--drop table body, car_ad, color, drive, engine, generation, kitting, model, producer, transmission, car_photo;
 
 --заполение таблицы role
 insert into "role"(name)

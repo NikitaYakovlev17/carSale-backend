@@ -24,8 +24,12 @@ public class CarAdService {
         return carAdMapper.toDto(carAdRepository.findAll());
     }
 
-    public CarAdDto getById(Long id){
+    public CarAdDto getDtoById(Long id){
         return carAdMapper.toDto(carAdRepository.getById(id));
+    }
+
+    public CarAd getById(Long id){
+        return carAdRepository.getById(id);
     }
 
     public List<CarAdDto> getCarAds(CarAdPage carAdPage, CarAdSearchCriteria carAdSearchCriteria){

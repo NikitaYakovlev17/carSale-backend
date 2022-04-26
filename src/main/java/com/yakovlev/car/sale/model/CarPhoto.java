@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @ToString
 @NoArgsConstructor
@@ -15,4 +17,8 @@ import javax.persistence.Entity;
 public class CarPhoto extends BaseEntity {
     @Column
     private String path;
+
+    @ManyToOne
+    @JoinColumn(name = "car_ad_id", nullable = false)
+    private CarAd carAd;
 }

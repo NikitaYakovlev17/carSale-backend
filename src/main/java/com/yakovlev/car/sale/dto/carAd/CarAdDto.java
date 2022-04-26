@@ -5,6 +5,8 @@ import com.yakovlev.car.sale.model.*;
 import com.yakovlev.car.sale.model.enums.ActivityStatus;
 import lombok.Data;
 
+import java.util.Collection;
+
 @Data
 public class CarAdDto {
     Long id;

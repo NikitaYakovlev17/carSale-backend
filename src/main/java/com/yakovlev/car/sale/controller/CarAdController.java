@@ -49,7 +49,7 @@ public class CarAdController {
 
     @GetMapping("id/{id}")
     public CarAdDto getById(@PathVariable Long id){
-        return carAdService.getById(id);
+        return carAdService.getDtoById(id);
     }
 
     @GetMapping("/{producer}")
@@ -72,12 +72,13 @@ public class CarAdController {
     public @ResponseBody
     void postFileUpload(@RequestParam("file") MultipartFile file,
                         @PathVariable Long carAdId) throws Exception {
-
+        CarAd carAd = carAdService.getById(carAdId);
         String extension = Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
         String newFileName = fileService.saveFile(extension, "carAdPhotos", file);
         CarPhoto carPhoto = CarPhoto
                 .builder()
                 .path(newFileName + "." + extension)
+                .carAd(carAd)
                 .build();
         carPhotoService.savePhoto(carPhoto);
     }
