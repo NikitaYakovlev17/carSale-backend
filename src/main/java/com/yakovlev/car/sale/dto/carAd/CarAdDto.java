@@ -12,6 +12,7 @@ public class CarAdDto {
     String mileage;
     String description;
     Integer year;
+    String location;
     GenerationDto generation;
     Body body;
     Transmission transmission;

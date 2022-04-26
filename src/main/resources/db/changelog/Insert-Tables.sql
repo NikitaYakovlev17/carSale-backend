@@ -1,4 +1,4 @@
---drop table body, car_ad, color, drive, engine, generation, kitting, model, producer, transmission, car_photo;
+--drop table body, car_ad, color, drive, engine, generation, kitting, model, producer, transmission;
 
 --заполение таблицы role
 insert into "role"(name)
@@ -61,7 +61,7 @@ values (1900, 'diesel'),
        (3000, 'diesel');
 
 --заполение таблицы car_ad
-insert into car_ad(price, description, mileage, year, body_id, color_id, drive_id, engine_id, generation_id, transmission_id, user_id)
-values (10000, 'qwerty', 300000, 2000, 1, 1, 1, 1, 1, 1, 1),
-       (14500, 'qwerty2222', 100000, 2004, 2, 2, 2, 2, 2, 2, 1);
+insert into car_ad(price, description, mileage, year, location, body_id, color_id, drive_id, engine_id, generation_id, transmission_id, user_id)
+values (10000, 'qwerty', 300000, 2000, 'Postavy', 1, 1, 1, 1, 1, 1, 1),
+       (14500, 'qwerty2222', 100000, 2004, 'Postavy', 2, 2, 2, 2, 2, 2, 1);
 

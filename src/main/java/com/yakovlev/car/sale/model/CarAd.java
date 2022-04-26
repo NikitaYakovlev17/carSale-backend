@@ -26,6 +26,9 @@ public class CarAd extends BaseEntity {
     @Column
     private Integer year;
 
+    @Column
+    private String location;
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private Generation generation;
