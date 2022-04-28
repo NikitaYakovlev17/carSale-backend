@@ -13,7 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/body")
 public class BodyController {
-
     private final BodyService bodyService;
 
     @GetMapping("/all")

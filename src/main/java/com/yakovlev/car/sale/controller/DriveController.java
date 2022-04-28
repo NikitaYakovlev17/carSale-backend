@@ -13,7 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/drive")
 public class DriveController {
-
     private final DriveService driveService;
 
     @GetMapping("/all")

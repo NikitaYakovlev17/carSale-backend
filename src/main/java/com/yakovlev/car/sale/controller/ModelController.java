@@ -14,10 +14,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/model")
 public class ModelController {
-
     private final GenerationService generationService;
 
-    @GetMapping("/producer/{model}")
+    @GetMapping("/{model}")
     public List<GenerationDto> getAllGenerationsByModelName(@PathVariable String model){
         return generationService.getAllByModelName(model);
     }
