@@ -1,14 +1,17 @@
 package com.yakovlev.car.sale.repository;
 
-import com.yakovlev.car.sale.model.*;
+import com.yakovlev.car.sale.model.CarAd;
+import com.yakovlev.car.sale.model.CarAdPage;
+import com.yakovlev.car.sale.model.CarAdSearchCriteria;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

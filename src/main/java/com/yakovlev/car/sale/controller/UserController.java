@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -61,6 +62,16 @@ public class UserController {
         userService.isUserRegistered(user.email());
         userService.register(user);
         log.info("User with email {} successfully registered. {}", user.email(), LocalDate.now());
+    }
+
+    @GetMapping(value = "/logout")
+    public void logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("access", null);
+        cookie.setMaxAge(0);
+        cookie.setSecure(true);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        response.addCookie(cookie);
     }
 
     @GetMapping("/{id}")

@@ -2,6 +2,7 @@ package com.yakovlev.car.sale.controller;
 
 import com.dropbox.core.DbxException;
 import com.yakovlev.car.sale.dto.carAd.CarAdDto;
+import com.yakovlev.car.sale.dto.carPhoto.CarPhotoDto;
 import com.yakovlev.car.sale.dto.generation.GenerationDto;
 import com.yakovlev.car.sale.dto.model.ModelDto;
 import com.yakovlev.car.sale.dto.producer.ProducerDto;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -96,5 +98,10 @@ public class CarAdController {
                 .contentType(MediaType.parseMediaType("image/" + extension))
                 //.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + path + "\"")
                 .body(new InputStreamResource(inputStream));
+    }
+
+    @GetMapping("/file/{id}/all")
+    public List<CarPhotoDto> getAllByCarAdId(@PathVariable Long id){
+        return carPhotoService.getAllByCarAdId(id);
     }
 }
