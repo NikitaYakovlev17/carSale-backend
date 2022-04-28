@@ -2,6 +2,7 @@ package com.yakovlev.car.sale.service;
 
 import com.yakovlev.car.sale.dto.carAd.CarAdDto;
 import com.yakovlev.car.sale.mapper.CarAdMapper;
+import com.yakovlev.car.sale.mapper.UserMapper;
 import com.yakovlev.car.sale.model.CarAd;
 import com.yakovlev.car.sale.model.CarAdPage;
 import com.yakovlev.car.sale.model.CarAdSearchCriteria;
@@ -19,6 +20,7 @@ public class CarAdService {
     private final CarAdRepository carAdRepository;
     private final CarAdCriteriaRepository carAdCriteriaRepository;
     private final CarAdMapper carAdMapper;
+    private final UserMapper userMapper;
 
     public List<CarAdDto> getAll() {
         return carAdMapper.toDto(carAdRepository.findAll());

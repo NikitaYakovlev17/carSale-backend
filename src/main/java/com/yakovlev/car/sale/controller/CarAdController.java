@@ -3,16 +3,17 @@ package com.yakovlev.car.sale.controller;
 import com.dropbox.core.DbxException;
 import com.yakovlev.car.sale.dto.carAd.CarAdDto;
 import com.yakovlev.car.sale.dto.carPhoto.CarPhotoDto;
-import com.yakovlev.car.sale.dto.generation.GenerationDto;
-import com.yakovlev.car.sale.dto.model.ModelDto;
-import com.yakovlev.car.sale.dto.producer.ProducerDto;
-import com.yakovlev.car.sale.model.*;
-import com.yakovlev.car.sale.service.*;
+import com.yakovlev.car.sale.model.CarAd;
+import com.yakovlev.car.sale.model.CarAdPage;
+import com.yakovlev.car.sale.model.CarAdSearchCriteria;
+import com.yakovlev.car.sale.model.CarPhoto;
+import com.yakovlev.car.sale.service.CarAdService;
+import com.yakovlev.car.sale.service.CarPhotoService;
+import com.yakovlev.car.sale.service.DropboxService;
+import com.yakovlev.car.sale.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,36 +32,19 @@ import java.util.Objects;
 @RequestMapping(value = "/api/v1/car-ad")
 public class CarAdController {
     private final CarAdService carAdService;
-    private final ProducerService producerService;
-    private final ModelService modelService;
-    private final GenerationService generationService;
     private final FileService fileService;
     private final CarPhotoService carPhotoService;
     private final DropboxService dropboxService;
 
-    @GetMapping("/producers")
-    public List<ProducerDto> getAllProducers(){
-        return producerService.getAll();
-    }
 
     @GetMapping
     public List<CarAdDto> getAll(){
         return carAdService.getAll();
     }
 
-    @GetMapping("id/{id}")
+    @GetMapping("/{id}")
     public CarAdDto getById(@PathVariable Long id){
         return carAdService.getDtoById(id);
-    }
-
-    @GetMapping("/{producer}")
-    public List<ModelDto> getAllModelsByProducerName(@PathVariable String producer){
-        return modelService.getAllByProducerName(producer);
-    }
-
-    @GetMapping("/producer/{model}")
-    public List<GenerationDto> getAllGenerationsByModelName(@PathVariable String model){
-        return generationService.getAllByModelName(model);
     }
 
     @GetMapping("/filter")
