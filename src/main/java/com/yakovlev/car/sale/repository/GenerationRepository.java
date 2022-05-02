@@ -11,4 +11,7 @@ import java.util.List;
 @Repository
 public interface GenerationRepository extends JpaRepository<Generation, Long> {
     List<Generation> getAllByModelName(String name);
+    //List<Integer> getYearsByGenerationId(Long id);
+
+    Generation getGenerationById(Long id);
 }
