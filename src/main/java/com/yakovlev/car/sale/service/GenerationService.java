@@ -24,8 +24,8 @@ public class GenerationService {
         return generationMapper.toDto(generationRepository.getAllByModelName(name));
     }
 
-    public List<Integer> getYearsByGenerationId(Long id){
-        Generation generation = generationRepository.getGenerationById(id);
+    public List<Integer> getYearsByGenerationName(String name){
+        Generation generation = generationRepository.getGenerationByName(name);
         List<Integer> years = new ArrayList<>();
         for (int i = generation.getStartOfProduction(); i <= generation.getEndOfProduction(); i++) {
             years.add(i);

@@ -15,8 +15,8 @@ import java.util.List;
 public class GenerationController {
     private final GenerationService generationService;
 
-    @GetMapping("/years/{id}")
-    public List<Integer> getYearsByGenerationId(@PathVariable Long id){
-        return generationService.getYearsByGenerationId(id);
+    @GetMapping("/years/{name}")
+    public List<Integer> getYearsByGenerationId(@PathVariable String name){
+        return generationService.getYearsByGenerationName(name);
     }
 }
