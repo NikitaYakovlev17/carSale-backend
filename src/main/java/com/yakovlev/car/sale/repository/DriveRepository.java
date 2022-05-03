@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DriveRepository extends JpaRepository<Drive, Long> {
+    Drive getDriveByType(String type);
 }

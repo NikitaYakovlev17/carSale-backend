@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransmissionRepository extends JpaRepository<Transmission, Long> {
+    Transmission getTransmissionByType(String type);
 }

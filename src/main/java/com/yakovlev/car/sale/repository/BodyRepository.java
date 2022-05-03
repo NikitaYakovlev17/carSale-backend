@@ -9,4 +9,5 @@ import java.util.List;
 
 @Repository
 public interface BodyRepository extends JpaRepository<Body, Long> {
+    Body getBodyByName(String name);
 }

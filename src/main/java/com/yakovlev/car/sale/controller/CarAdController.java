@@ -1,6 +1,7 @@
 package com.yakovlev.car.sale.controller;
 
 import com.dropbox.core.DbxException;
+import com.yakovlev.car.sale.dto.RegistrationRequestDto;
 import com.yakovlev.car.sale.dto.carAd.CarAdDto;
 import com.yakovlev.car.sale.dto.carPhoto.CarPhotoDto;
 import com.yakovlev.car.sale.model.CarAd;
@@ -20,9 +21,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -86,5 +89,11 @@ public class CarAdController {
     @GetMapping("/file/{id}/all")
     public List<CarPhotoDto> getAllByCarAdId(@PathVariable Long id){
         return carPhotoService.getAllByCarAdId(id);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value = "/add")
+    public void add(@Valid @RequestBody CarAdDto carAdDto){
+        carAdService.add(carAdDto);
     }
 }

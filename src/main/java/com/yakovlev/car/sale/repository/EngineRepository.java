@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EngineRepository extends JpaRepository<Engine, Long> {
+    Engine getEngineByDisplacement(Integer displacement);
 }
