@@ -10,6 +10,5 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CarAdMapper {
     CarAdDto toDto(CarAd source);
-
     List<CarAdDto> toDto(List<CarAd> source);
 }

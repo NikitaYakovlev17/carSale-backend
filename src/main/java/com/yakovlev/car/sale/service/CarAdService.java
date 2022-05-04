@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.List;
 
 @Service
@@ -45,8 +44,8 @@ public class CarAdService {
         return carAdDtos;
     }
 
-    public void add(CarAdDto carAdDto){
-        this.carAdRepository.save(
+    public CarAd add(CarAdDto carAdDto){
+        CarAd carAd = this.carAdRepository.save(
                 CarAd.builder()
                         .price(carAdDto.getPrice())
                         .mileage(carAdDto.getMileage())
@@ -62,5 +61,6 @@ public class CarAdService {
                         .user(this.userRepository.getById(carAdDto.getUser().getId()))
                         .build()
         );
+        return carAd;
     }
 }

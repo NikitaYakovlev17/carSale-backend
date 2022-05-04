@@ -52,4 +52,20 @@ public class UserService {
                         .build()
         );
     }
+
+    public UserDto editInfo(Long id, UserDto userDto) throws Exception {
+        User user = this.userRepository.findById(id).orElseThrow(() ->
+                new Exception(String.format("Пользователя с id=%s не существует", id)));
+        user.setFirstName(userDto.getFirstName());
+        user.setPhoneNumber(userDto.getPhoneNumber());
+        user.setEmail(userDto.getEmail());
+        return userMapper.toDto(userRepository.save(user));
+    }
+
+    public UserDto editPassword(Long id, String password) throws Exception {
+        User user = this.userRepository.findById(id).orElseThrow(() ->
+                new Exception(String.format("Пользователя с id=%s не существует", id)));
+        user.setPassword(passwordEncoder.encode(password));
+        return userMapper.toDto(userRepository.save(user));
+    }
 }

@@ -78,4 +78,20 @@ public class UserController {
     public UserDto getUserById(@PathVariable Long id){
         return userService.getById(id);
     }
+
+
+    @PutMapping(value = "/{id}")
+    public UserDto updateUserInfo(@Valid @RequestBody UserDto user, @PathVariable Long id) throws Exception {
+        UserDto userFromDb = userService.editInfo(id, user);
+        log.info("User with id {} successfully edited. {}", id, LocalDate.now());
+        return userFromDb;
+    }
+
+    @PutMapping(value = "/{id}/password")
+    public UserDto updatePassword(@Valid @RequestBody String password, @PathVariable Long id) throws Exception {
+        UserDto userFromDb = userService.editPassword(id, password);
+        log.info("User password with id {} successfully edited. {}", id, LocalDate.now());
+        return userFromDb;
+    }
+
 }

@@ -1,7 +1,6 @@
 package com.yakovlev.car.sale.controller;
 
 import com.dropbox.core.DbxException;
-import com.yakovlev.car.sale.dto.RegistrationRequestDto;
 import com.yakovlev.car.sale.dto.carAd.CarAdDto;
 import com.yakovlev.car.sale.dto.carPhoto.CarPhotoDto;
 import com.yakovlev.car.sale.model.CarAd;
@@ -25,7 +24,6 @@ import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -92,8 +90,10 @@ public class CarAdController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/add")
-    public void add(@Valid @RequestBody CarAdDto carAdDto){
-        carAdService.add(carAdDto);
+    @RequestMapping(method= RequestMethod.POST, value = "/add")
+    @ResponseBody
+    public Long add(@Valid @RequestBody CarAdDto carAdDto){
+        CarAd carAd = carAdService.add(carAdDto);
+        return carAd.getId();
     }
 }
