@@ -96,4 +96,9 @@ public class CarAdController {
         CarAd carAd = carAdService.add(carAdDto);
         return carAd.getId();
     }
+
+    @GetMapping("/{id}/liked")
+    public List<CarAdDto> getLiked(@PathVariable Long id){
+        return carAdService.getLiked(id);
+    }
 }

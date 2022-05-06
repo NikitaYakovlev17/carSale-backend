@@ -1,4 +1,4 @@
---drop table body, car_ad, color, drive, engine, generation, kitting, model, producer, transmission;
+--drop table body, car_ad, color, drive, engine, generation, kitting, model, producer, transmission, car_photo, car_ad_like;
 
 --заполение таблицы role
 insert into "role"(name)
@@ -161,17 +161,26 @@ insert into engine(displacement, type)
 values (1900, 'diesel'),
        (3000, 'diesel');
 
+--заполение таблицы car_ad_like
+insert into car_ad_like(user_id, car_ad_id)
+values (1, 5),
+       (1, 6),
+       (1, 7),
+       (2, 5),
+       (2, 6),
+       (2, 7);
+
 --заполение таблицы car_ad
-insert into car_ad(price, description, mileage, year, location, body_id, color_id, drive_id, engine_id, generation_id, transmission_id, user_id)
-values (10000, 'qwerty', 300000, 1996, 'Postavy', 1, 1, 1, 1, 1, 1, 1),
-       (14500, 'qwerty123', 100000, 2004, 'Minsk', 2, 2, 2, 2, 2, 2, 2),
-       (19000, 'qwerty12333', 100000, 2006, 'Vitebsk', 3, 3, 2, 2, 3, 2, 1),
-       (20000, 'qgwqgqgvqqv', 100000, 2012, 'Brest', 4, 4, 2, 2, 4, 2, 2),
-       (12345, 'qgwqgqgvqqv', 100000, 2012, 'Polotsk', 4, 4, 2, 2, 11, 2, 2),
-       (52352, 'qgwqgqgvqqv', 100000, 2012, 'Voropaevo', 4, 4, 2, 2, 12, 2, 2),
-       (15354, 'qgwqgqgvqqv', 100000, 2012, 'Mozyr', 4, 4, 2, 2, 13, 2, 2),
-       (3124, 'qgwqgqgvqqv', 100000, 2012, 'Miory', 4, 4, 2, 2, 18, 2, 2),
-       (1234, 'qgwqgqgvqqv', 100000, 2012, 'Ilya', 4, 4, 2, 2, 19, 2, 2),
-       (56345, 'qgwqgqgvqqv', 100000, 2012, 'Hotily', 4, 4, 2, 2, 20, 2, 2),
-       (36000, 'vhqwiolcvhu wciowq', 100000, 2018, 'Gomel', 5, 1, 2, 2, 5, 2, 1);
+insert into car_ad(created_on, price, description, mileage, year, location, body_id, color_id, drive_id, engine_id, generation_id, transmission_id, user_id)
+values ('2020-04-04', 10000, 'qwerty', 300000, 1996, 'Postavy', 1, 1, 1, 1, 1, 1, 1),
+       ('2020-04-04', 14500, 'qwerty123', 100000, 2004, 'Minsk', 2, 2, 2, 2, 2, 2, 2),
+       ('2020-04-04', 19000, 'qwerty12333', 100000, 2006, 'Vitebsk', 3, 3, 2, 2, 3, 2, 1),
+       ('2020-04-04', 20000, 'qgwqgqgvqqv', 100000, 2012, 'Brest', 4, 4, 2, 2, 4, 2, 2),
+       ('2020-04-04', 12345, 'qgwqgqgvqqv', 100000, 2012, 'Polotsk', 4, 4, 2, 2, 11, 2, 2),
+       ('2020-04-04', 52352, 'qgwqgqgvqqv', 100000, 2012, 'Voropaevo', 4, 4, 2, 2, 12, 2, 2),
+       ('2020-04-04', 15354, 'qgwqgqgvqqv', 100000, 2012, 'Mozyr', 4, 4, 2, 2, 13, 2, 2),
+       ('2020-04-04', 3124, 'qgwqgqgvqqv', 100000, 2012, 'Miory', 4, 4, 2, 2, 18, 2, 2),
+       ('2020-04-04', 1234, 'qgwqgqgvqqv', 100000, 2012, 'Ilya', 4, 4, 2, 2, 19, 2, 2),
+       ('2020-04-04', 56345, 'qgwqgqgvqqv', 100000, 2012, 'Hotily', 4, 4, 2, 2, 20, 2, 2),
+       ('2020-04-04', 36000, 'vhqwiolcvhu wciowq', 100000, 2018, 'Gomel', 5, 1, 2, 2, 5, 2, 1);
 

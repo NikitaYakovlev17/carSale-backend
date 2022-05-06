@@ -5,11 +5,13 @@ import com.yakovlev.car.sale.mapper.CarAdMapper;
 import com.yakovlev.car.sale.model.CarAd;
 import com.yakovlev.car.sale.model.CarAdPage;
 import com.yakovlev.car.sale.model.CarAdSearchCriteria;
+import com.yakovlev.car.sale.model.User;
 import com.yakovlev.car.sale.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -45,22 +47,28 @@ public class CarAdService {
     }
 
     public CarAd add(CarAdDto carAdDto){
-        CarAd carAd = this.carAdRepository.save(
-                CarAd.builder()
-                        .price(carAdDto.getPrice())
-                        .mileage(carAdDto.getMileage())
-                        .description(carAdDto.getDescription())
-                        .year(carAdDto.getYear())
-                        .location(carAdDto.getLocation())
-                        .generation(this.generationRepository.getById(carAdDto.getGeneration().getId()))
-                        .body(this.bodyRepository.getBodyByName(carAdDto.getBody().getName()))
-                        .transmission(this.transmissionRepository.getTransmissionByType(carAdDto.getTransmission().getType()))
-                        .engine(this.engineRepository.getById(carAdDto.getEngine().getId()))
-                        .drive(this.driveRepository.getDriveByType(carAdDto.getDrive().getType()))
-                        .color(this.colorRepository.getColorByName(carAdDto.getColor().getName()))
-                        .user(this.userRepository.getById(carAdDto.getUser().getId()))
-                        .build()
-        );
-        return carAd;
+        CarAd carAd = CarAd
+                .builder()
+                .price(carAdDto.getPrice())
+                .mileage(carAdDto.getMileage())
+                .description(carAdDto.getDescription())
+                .year(carAdDto.getYear())
+                .location(carAdDto.getLocation())
+                .generation(this.generationRepository.getById(carAdDto.getGeneration().getId()))
+                .body(this.bodyRepository.getBodyByName(carAdDto.getBody().getName()))
+                .transmission(this.transmissionRepository.getTransmissionByType(carAdDto.getTransmission().getType()))
+                .engine(this.engineRepository.getById(carAdDto.getEngine().getId()))
+                .drive(this.driveRepository.getDriveByType(carAdDto.getDrive().getType()))
+                .color(this.colorRepository.getColorByName(carAdDto.getColor().getName()))
+                .user(this.userRepository.getById(carAdDto.getUser().getId()))
+                .build();
+        carAd.setCreatedOn(LocalDate.now());
+        CarAd createdCarAd = this.carAdRepository.save(carAd);
+        return createdCarAd;
+    }
+
+    public List<CarAdDto> getLiked(Long id){
+        User user = userRepository.getById(id);
+        return carAdMapper.toDto(carAdRepository.findByLikes(user));
     }
 }

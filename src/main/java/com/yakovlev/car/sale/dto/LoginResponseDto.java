@@ -6,6 +6,7 @@ public record LoginResponseDto(
         Long id,
         String email,
         RoleRequestDto role,
-        String firstName
+        String firstName,
+        String phoneNumber
 ) {
 }

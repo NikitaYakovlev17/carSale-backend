@@ -12,7 +12,7 @@ import java.util.Collection;
 @Setter
 @Builder
 @Entity
-public class CarAd extends BaseEntity {
+public class CarAd extends BaseEntityWithCreatedDate {
 
     @Column
     private Integer price;
@@ -62,4 +62,7 @@ public class CarAd extends BaseEntity {
 
     @OneToMany(mappedBy = "carAd", fetch = FetchType.LAZY)
     private Collection<CarPhoto> carPhotos;
+
+    @ManyToMany(mappedBy = "likedCarAds")
+    private Collection<User> likes;
 }

@@ -1,5 +1,6 @@
 package com.yakovlev.car.sale.controller;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.yakovlev.car.sale.dto.LoginRequestDto;
 import com.yakovlev.car.sale.dto.LoginResponseDto;
 import com.yakovlev.car.sale.dto.RegistrationRequestDto;
@@ -20,6 +21,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -52,7 +54,8 @@ public class UserController {
                 user.getId(),
                 user.getEmail(),
                 new RoleRequestDto(user.getRole().getName()),
-                user.getFirstName());
+                user.getFirstName(),
+                user.getPhoneNumber());
     }
 
 
@@ -88,8 +91,8 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}/password")
-    public UserDto updatePassword(@Valid @RequestBody String password, @PathVariable Long id) throws Exception {
-        UserDto userFromDb = userService.editPassword(id, password);
+    public UserDto updatePassword(@Valid @RequestBody ObjectNode json, @PathVariable Long id) throws Exception {
+        UserDto userFromDb = userService.editPassword(id, json.get("password").asText(), json.get("oldPassword").asText());
         log.info("User password with id {} successfully edited. {}", id, LocalDate.now());
         return userFromDb;
     }

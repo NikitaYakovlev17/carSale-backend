@@ -6,11 +6,13 @@ import com.yakovlev.car.sale.model.*;
 import com.yakovlev.car.sale.model.enums.ActivityStatus;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 @Data
 public class CarAdDto {
     Long id;
+    LocalDate createdOn;
     Integer price;
     String mileage;
     String description;

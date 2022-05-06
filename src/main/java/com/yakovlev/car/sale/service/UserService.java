@@ -1,16 +1,20 @@
 package com.yakovlev.car.sale.service;
 
 import com.yakovlev.car.sale.dto.RegistrationRequestDto;
+import com.yakovlev.car.sale.dto.carAd.CarAdDto;
 import com.yakovlev.car.sale.dto.user.UserDto;
 import com.yakovlev.car.sale.exception.RegistrationException;
 import com.yakovlev.car.sale.mapper.UserMapper;
+import com.yakovlev.car.sale.model.CarAd;
 import com.yakovlev.car.sale.model.User;
 import com.yakovlev.car.sale.model.enums.ActivityStatus;
 import com.yakovlev.car.sale.repository.RoleRepository;
+import com.yakovlev.car.sale.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.yakovlev.car.sale.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -62,10 +66,14 @@ public class UserService {
         return userMapper.toDto(userRepository.save(user));
     }
 
-    public UserDto editPassword(Long id, String password) throws Exception {
+    public UserDto editPassword(Long id, String password, String oldPassword) throws Exception {
         User user = this.userRepository.findById(id).orElseThrow(() ->
                 new Exception(String.format("Пользователя с id=%s не существует", id)));
-        user.setPassword(passwordEncoder.encode(password));
+        if(passwordEncoder.matches(oldPassword, user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(password));
+        }
+        else
+            throw new Exception("Passwords do not match");
         return userMapper.toDto(userRepository.save(user));
     }
 }

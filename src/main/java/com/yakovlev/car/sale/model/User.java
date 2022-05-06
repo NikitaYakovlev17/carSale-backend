@@ -42,4 +42,11 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Collection<CarAd> carAds;
+
+    @ManyToMany
+    @JoinTable(
+            name = "car_ad_like",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "car_ad_id"))
+    private Collection<CarAd> likedCarAds;
 }
