@@ -81,9 +81,14 @@ public class UserService {
         return userMapper.toDto(userRepository.save(user));
     }
 
-    public void likeCarAd(Long id, Long carAdId){
+    public void likeCarAd(Long id, Long carAdId) throws Exception {
         User user = userRepository.getById(id);
+        CarAd carAd = carAdRepository.getById(carAdId);
         Collection<CarAd> liked = user.getLikedCarAds();
+        for (CarAd likedCarAd : liked) {
+            if(likedCarAd.equals(carAd))
+                throw new Exception("Already bookmarked the carAd");
+        }
         liked.add(carAdRepository.getById(carAdId));
         user.setLikedCarAds(liked);
         userRepository.save(user);

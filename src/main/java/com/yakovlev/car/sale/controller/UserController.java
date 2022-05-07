@@ -98,7 +98,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}/like/{carAdId}")
-    public void likeCarAd(@PathVariable Long id, @PathVariable Long carAdId) {
+    public void likeCarAd(@PathVariable Long id, @PathVariable Long carAdId) throws Exception {
         userService.likeCarAd(id, carAdId);
     }
 }
