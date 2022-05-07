@@ -4,6 +4,7 @@ import com.yakovlev.car.sale.dto.RegistrationRequestDto;
 import com.yakovlev.car.sale.dto.carAd.CarAdDto;
 import com.yakovlev.car.sale.dto.user.UserDto;
 import com.yakovlev.car.sale.exception.RegistrationException;
+import com.yakovlev.car.sale.mapper.CarAdMapper;
 import com.yakovlev.car.sale.mapper.UserMapper;
 import com.yakovlev.car.sale.model.CarAd;
 import com.yakovlev.car.sale.model.User;
@@ -24,6 +25,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final CarAdRepository carAdRepository;
+    private final CarAdMapper carAdMapper;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
@@ -90,6 +92,14 @@ public class UserService {
                 throw new Exception("Already bookmarked the carAd");
         }
         liked.add(carAdRepository.getById(carAdId));
+        user.setLikedCarAds(liked);
+        userRepository.save(user);
+    }
+
+    public void dislikeCarAd(Long id, Long carAdId){
+        User user = userRepository.getById(id);
+        Collection<CarAd> liked = user.getLikedCarAds();
+        liked.removeIf(e-> e.getId().equals(carAdId));
         user.setLikedCarAds(liked);
         userRepository.save(user);
     }

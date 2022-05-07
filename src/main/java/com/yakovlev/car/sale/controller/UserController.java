@@ -101,4 +101,9 @@ public class UserController {
     public void likeCarAd(@PathVariable Long id, @PathVariable Long carAdId) throws Exception {
         userService.likeCarAd(id, carAdId);
     }
+
+    @GetMapping(value = "/{id}/dislike/{carAdId}")
+    public void dislikeCarAd(@PathVariable Long id, @PathVariable Long carAdId){
+        userService.dislikeCarAd(id, carAdId);
+    }
 }
