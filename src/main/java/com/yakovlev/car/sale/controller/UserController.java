@@ -97,4 +97,8 @@ public class UserController {
         return userFromDb;
     }
 
+    @GetMapping(value = "/{id}/like/{carAdId}")
+    public void likeCarAd(@PathVariable Long id, @PathVariable Long carAdId) {
+        userService.likeCarAd(id, carAdId);
+    }
 }

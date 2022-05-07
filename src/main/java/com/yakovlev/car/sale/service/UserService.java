@@ -8,18 +8,22 @@ import com.yakovlev.car.sale.mapper.UserMapper;
 import com.yakovlev.car.sale.model.CarAd;
 import com.yakovlev.car.sale.model.User;
 import com.yakovlev.car.sale.model.enums.ActivityStatus;
+import com.yakovlev.car.sale.repository.CarAdRepository;
 import com.yakovlev.car.sale.repository.RoleRepository;
 import com.yakovlev.car.sale.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.control.MappingControl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final CarAdRepository carAdRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
@@ -75,5 +79,13 @@ public class UserService {
         else
             throw new Exception("Passwords do not match");
         return userMapper.toDto(userRepository.save(user));
+    }
+
+    public void likeCarAd(Long id, Long carAdId){
+        User user = userRepository.getById(id);
+        Collection<CarAd> liked = user.getLikedCarAds();
+        liked.add(carAdRepository.getById(carAdId));
+        user.setLikedCarAds(liked);
+        userRepository.save(user);
     }
 }
