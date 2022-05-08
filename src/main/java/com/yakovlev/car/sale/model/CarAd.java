@@ -65,14 +65,13 @@ public class CarAd extends BaseEntityWithCreatedDate {
     @OneToMany(mappedBy = "carAd", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Collection<CarPhoto> carPhotos;
 
-//    @ManyToMany(mappedBy = "likedCarAds", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    private Collection<User> likes;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(
-            name = "car_ad_like",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "car_ad_id"))
+    @ManyToMany(mappedBy = "likedCarAds")
     private Collection<User> likes;
+
+//    @ManyToMany
+//    @JoinTable(
+//            name = "car_ad_like",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "car_ad_id"))
+//    private Collection<User> likes;
 }
