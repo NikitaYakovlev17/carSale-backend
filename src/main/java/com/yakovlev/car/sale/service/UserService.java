@@ -103,4 +103,9 @@ public class UserService {
         user.setLikedCarAds(liked);
         userRepository.save(user);
     }
+
+    public List<UserDto> findUsersByLikedCarAds(Long id){
+        CarAd carAd = carAdRepository.getById(id);
+        return userMapper.toDto(userRepository.findUsersByLikedCarAds(carAd));
+    }
 }

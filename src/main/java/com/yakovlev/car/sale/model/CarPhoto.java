@@ -2,10 +2,7 @@ package com.yakovlev.car.sale.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @ToString
 @NoArgsConstructor
@@ -18,7 +15,7 @@ public class CarPhoto extends BaseEntity {
     @Column
     private String path;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "car_ad_id", nullable = false)
     private CarAd carAd;
 }

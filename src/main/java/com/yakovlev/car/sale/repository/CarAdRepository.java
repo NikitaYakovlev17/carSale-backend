@@ -14,4 +14,8 @@ public interface CarAdRepository extends JpaRepository<CarAd, Long> {
     CarAd getById(Long id);
 
     List<CarAd> findByLikes(User user);
+
+    List<CarAd> findAllByUserId(Long id);
+
+    void deleteById(Long id);
 }

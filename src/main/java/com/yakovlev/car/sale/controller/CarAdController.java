@@ -3,14 +3,12 @@ package com.yakovlev.car.sale.controller;
 import com.dropbox.core.DbxException;
 import com.yakovlev.car.sale.dto.carAd.CarAdDto;
 import com.yakovlev.car.sale.dto.carPhoto.CarPhotoDto;
+import com.yakovlev.car.sale.dto.user.UserDto;
 import com.yakovlev.car.sale.model.CarAd;
 import com.yakovlev.car.sale.model.CarAdPage;
 import com.yakovlev.car.sale.model.CarAdSearchCriteria;
 import com.yakovlev.car.sale.model.CarPhoto;
-import com.yakovlev.car.sale.service.CarAdService;
-import com.yakovlev.car.sale.service.CarPhotoService;
-import com.yakovlev.car.sale.service.DropboxService;
-import com.yakovlev.car.sale.service.FileService;
+import com.yakovlev.car.sale.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
@@ -20,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -29,10 +28,12 @@ import java.util.Objects;
 
 @Slf4j
 @RestController
+@Transactional
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/car-ad")
 public class CarAdController {
     private final CarAdService carAdService;
+    private final UserService userService;
     private final FileService fileService;
     private final CarPhotoService carPhotoService;
     private final DropboxService dropboxService;
@@ -48,7 +49,16 @@ public class CarAdController {
         return carAdService.getDtoById(id);
     }
 
-    @GetMapping("/filter")
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable Long id){
+        List<UserDto> userDtos = userService.findUsersByLikedCarAds(id);
+        for (UserDto userDto: userDtos) {
+            userService.dislikeCarAd(userDto.getId(), id);
+        }
+        carAdService.deleteById(id);
+    }
+
+    @GetMapping(".../filter")
     public ResponseEntity<List<CarAdDto>> getCarAds(CarAdPage carAdPage, CarAdSearchCriteria carAdSearchCriteria){
         return new ResponseEntity<>(carAdService.getCarAds(carAdPage, carAdSearchCriteria),
                 HttpStatus.OK);
@@ -100,5 +110,10 @@ public class CarAdController {
     @GetMapping("/{id}/liked")
     public List<CarAdDto> getLiked(@PathVariable Long id){
         return carAdService.getLiked(id);
+    }
+
+    @GetMapping("/{id}/all")
+    public List<CarAdDto> allUserCarAd(@PathVariable Long id){
+        return carAdService.allUserCarAd(id);
     }
 }

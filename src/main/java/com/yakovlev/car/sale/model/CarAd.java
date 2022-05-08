@@ -1,6 +1,8 @@
 package com.yakovlev.car.sale.model;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -56,13 +58,21 @@ public class CarAd extends BaseEntityWithCreatedDate {
     @OneToMany(mappedBy = "carAd", fetch = FetchType.LAZY)
     private Collection<Kitting> kittings;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "carAd", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "carAd", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Collection<CarPhoto> carPhotos;
 
-    @ManyToMany(mappedBy = "likedCarAds")
+//    @ManyToMany(mappedBy = "likedCarAds", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    private Collection<User> likes;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "car_ad_like",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "car_ad_id"))
     private Collection<User> likes;
 }

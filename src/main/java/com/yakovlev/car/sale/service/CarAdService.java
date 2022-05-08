@@ -71,4 +71,12 @@ public class CarAdService {
         User user = userRepository.getById(id);
         return carAdMapper.toDto(carAdRepository.findByLikes(user));
     }
+
+    public List<CarAdDto> allUserCarAd(Long id){
+        return carAdMapper.toDto(carAdRepository.findAllByUserId(id));
+    }
+
+    public void deleteById(Long id){
+        carAdRepository.deleteById(id);
+    }
 }
