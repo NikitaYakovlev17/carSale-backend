@@ -67,11 +67,4 @@ public class CarAd extends BaseEntityWithCreatedDate {
 
     @ManyToMany(mappedBy = "likedCarAds")
     private Collection<User> likes;
-
-//    @ManyToMany
-//    @JoinTable(
-//            name = "car_ad_like",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "car_ad_id"))
-//    private Collection<User> likes;
 }
