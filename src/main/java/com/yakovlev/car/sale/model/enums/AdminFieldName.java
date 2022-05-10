@@ -1,5 +1,10 @@
 package com.yakovlev.car.sale.model.enums;
 
 public enum AdminFieldName {
-    Producer, Model, Generation
+    Color,
+    Producer,
+    Model,
+    Generation,
+    Body,
+    Engine
 }
