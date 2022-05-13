@@ -5,6 +5,7 @@ import com.yakovlev.car.sale.dto.producer.ProducerDto;
 import com.yakovlev.car.sale.mapper.ProducerMapper;
 import com.yakovlev.car.sale.model.Producer;
 import com.yakovlev.car.sale.model.enums.AdminFieldName;
+import com.yakovlev.car.sale.model.enums.EngineType;
 import com.yakovlev.car.sale.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,11 @@ public class AdminController {
     @GetMapping
     public ResponseEntity<List<AdminFieldName>> fields(){
         return new ResponseEntity<List<AdminFieldName>>(Arrays.asList(AdminFieldName.values()), HttpStatus.OK);
+    }
+
+    @GetMapping("/engine")
+    public ResponseEntity<List<EngineType>> engineType(){
+        return new ResponseEntity<List<EngineType>>(Arrays.asList(EngineType.values()), HttpStatus.OK);
     }
 
     @GetMapping("/add")
