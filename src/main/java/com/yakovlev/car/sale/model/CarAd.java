@@ -22,7 +22,7 @@ public class CarAd extends BaseEntityWithCreatedDate {
     @Column(nullable = false)
     private String mileage;
 
-    @Column
+    @Column(length = 5000)
     private String description;
 
     @Column

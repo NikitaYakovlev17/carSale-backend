@@ -12,4 +12,7 @@ public class CarSaleApplication {
 
 }
 
-//drop table body, car_ad, color, drive, engine, generation, kitting, model, producer, transmission, "user";
+//Admin@mail.ru admin123
+//User1@mail.ru useruser
+//User2@mail.ru useruser
+//User3@mail.ru useruser
